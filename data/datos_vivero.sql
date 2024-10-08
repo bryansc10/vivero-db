@@ -1,3 +1,5 @@
+USE vivero;
+
 INSERT INTO oficina VALUES (1, 'BCN-ES','Barcelona','España','Barcelona','08019','+34 93 3561182');
 INSERT INTO oficina VALUES (2, 'BOS-USA','Boston','EEUU','MA','02108','+1 215 837 0825');
 INSERT INTO oficina VALUES (3, 'LON-UK','Londres','Inglaterra','EMEA','EC2N 1HN','+44 20 78772041');
