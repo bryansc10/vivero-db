@@ -24,8 +24,8 @@ CREATE TABLE empleado (
   id_jefe INTEGER DEFAULT NULL,
   puesto VARCHAR(50) DEFAULT NULL,
   PRIMARY KEY (id_empleado),
-  FOREIGN KEY (id_oficina) REFERENCES oficina (id_oficina),
-  FOREIGN KEY (id_jefe) REFERENCES empleado (id_empleado)
+  CONSTRAINT fk_empleado_oficina FOREIGN KEY (id_oficina) REFERENCES oficina (id_oficina),
+  CONSTRAINT fk_empleado_empleado FOREIGN KEY (id_jefe) REFERENCES empleado (id_empleado)
 );
 
 CREATE TABLE gama_producto (
@@ -52,7 +52,7 @@ CREATE TABLE cliente (
   id_empleado INTEGER DEFAULT NULL,
   limite_credito DECIMAL(15,2) DEFAULT NULL,
   PRIMARY KEY (id_cliente),
-  FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado)
+  CONSTRAINT fk_cliente_empleado FOREIGN KEY (id_empleado) REFERENCES empleado (id_empleado)
 );
 
 CREATE TABLE pedido (
@@ -65,7 +65,7 @@ CREATE TABLE pedido (
   comentarios TEXT,
   id_cliente INTEGER NOT NULL,
   PRIMARY KEY (id_pedido),
-  FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+  CONSTRAINT fk_pedido_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
 );
 
 CREATE TABLE producto (
@@ -80,7 +80,7 @@ CREATE TABLE producto (
   precio_venta NUMERIC(15,2) NOT NULL,
   precio_proveedor NUMERIC(15,2) DEFAULT NULL,
   PRIMARY KEY (id_producto),
-  FOREIGN KEY (id_gama) REFERENCES gama_producto (id_gama)
+  CONSTRAINT fk_producto_gamaProducto FOREIGN KEY (id_gama) REFERENCES gama_producto (id_gama)
 );
 
 CREATE TABLE detalle_pedido (
@@ -91,8 +91,8 @@ CREATE TABLE detalle_pedido (
   precio_unidad DECIMAL(15,2) NOT NULL,
   numero_linea SMALLINT NOT NULL,
   PRIMARY KEY (id_detalle_pedido),
-  FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido),
-  FOREIGN KEY (id_producto) REFERENCES producto (id_producto)
+  CONSTRAINT fk_detallePedido_pedido FOREIGN KEY (id_pedido) REFERENCES pedido (id_pedido),
+  CONSTRAINT fk_detallePedido_producto FOREIGN KEY (id_producto) REFERENCES producto (id_producto)
 );
 
 CREATE TABLE pago (
@@ -103,5 +103,5 @@ CREATE TABLE pago (
   fecha_pago DATE NOT NULL,
   total DECIMAL(15,2) NOT NULL,
   PRIMARY KEY (id_pago),
-  FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+  CONSTRAINT fk_pago_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
 );
